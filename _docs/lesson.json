@@ -1,0 +1,245 @@
+{
+  "_id": "lesson",
+  "label": "Lesson",
+  "flow": {
+    "id": 300,
+    "name": "auto",
+    "flowOrder": 1
+  },
+  "form_elements": [
+    {
+      "label": "BEGIN TABLE ",
+      "value": "",
+      "options": [
+        {
+          "name": "optional",
+          "value": "true"
+        }
+      ],
+      "datatype": "display",
+      "visible": "true",
+      "closeRow": "false",
+      "colspan": "null",
+      "size": "null",
+      "rows": "null",
+      "cols": "3",
+      "identifier": "beginTableIdentifier",
+      "inputType": "display-tbl-begin"
+    },
+    {
+      "label": "Title",
+      "value": "",
+      "options": [
+        {
+          "name": "optional",
+          "value": "true"
+        }
+      ],
+      "datatype": "string",
+      "visible": "true",
+      "closeRow": "true",
+      "colspan": "3",
+      "size": "35",
+      "rows": "0",
+      "cols": "0",
+      "identifier": "title",
+      "inputType": "text"
+    },
+    {
+      "label": "Lesson Text",
+      "value": "",
+      "options": [
+        {
+          "name": "optional",
+          "value": "true"
+        }
+      ],
+      "datatype": "string",
+      "visible": "true",
+      "closeRow": "true",
+      "colspan": "3",
+      "size": "0",
+      "rows": "6",
+      "cols": "45",
+      "identifier": "lessonText",
+      "inputType": "textarea"
+    },
+    {
+      "label": "Subject",
+      "value": "",
+      "options": [
+        {
+          "name": "optional",
+          "value": "true"
+        }
+      ],
+      "datatype": "int",
+      "visible": "true",
+      "closeRow": "true",
+      "colspan": "3",
+      "size": "25",
+      "rows": "0",
+      "cols": "0",
+      "identifier": "subject",
+      "inputType": "selectFDA",
+      "enumerations": [
+        {
+          "name": "Item",
+          "tagName": "item",
+          "label": "Subject 1",
+          "labelItextID": "Subject1",
+          "defaultValue": "1"
+        },
+        {
+          "name": "Item",
+          "tagName": "item",
+          "label": "Subject 2",
+          "labelItextID": "Subject2",
+          "defaultValue": "2"
+        },
+        {
+          "name": "Item",
+          "tagName": "item",
+          "label": "Subject 3",
+          "labelItextID": "Subject3",
+          "defaultValue": "3"
+        }
+
+      ]
+    },
+    {
+      "label": "Grade",
+      "value": "",
+      "options": [
+        {
+          "name": "optional",
+          "value": "true"
+        }
+      ],
+      "datatype": "int",
+      "visible": "true",
+      "closeRow": "false",
+      "colspan": "1",
+      "size": "15",
+      "rows": "0",
+      "cols": "0",
+      "identifier": "grade",
+      "inputType": "text"
+    },
+    {
+      "label": "Week",
+      "value": "",
+      "options": [
+        {
+          "name": "optional",
+          "value": "true"
+        }
+      ],
+      "datatype": "int",
+      "visible": "true",
+      "closeRow": "false",
+      "colspan": "1",
+      "size": "25",
+      "rows": "0",
+      "cols": "0",
+      "identifier": "week",
+      "inputType": "text"
+    },
+    {
+      "label": "Day",
+      "value": "",
+      "options": [
+        {
+          "name": "optional",
+          "value": "true"
+        }
+      ],
+      "datatype": "int",
+      "visible": "true",
+      "closeRow": "true",
+      "colspan": "1",
+      "size": "25",
+      "rows": "0",
+      "cols": "0",
+      "identifier": "day",
+      "inputType": "text"
+    },
+    {
+      "label": "Audio Selections",
+      "value": "",
+      "options": [
+        {
+          "name": "optional",
+          "value": "true"
+        }
+      ],
+      "datatype": "string",
+      "visible": "true",
+      "closeRow": "true",
+      "colspan": "3",
+      "size": "25",
+      "rows": "0",
+      "cols": "0",
+      "identifier": "audio",
+      "inputType": "selectMult"
+    }, {
+      "label": "Image Selections",
+      "value": "",
+      "options": [
+        {
+          "name": "optional",
+          "value": "true"
+        }
+      ],
+      "datatype": "string",
+      "visible": "true",
+      "closeRow": "true",
+      "colspan": "3",
+      "size": "25",
+      "rows": "0",
+      "cols": "0",
+      "identifier": "image",
+      "inputType": "selectMult"
+    },
+    {
+      "label": "Save",
+      "value": "",
+      "options": [
+        {
+          "name": "optional",
+          "value": "true"
+        }
+      ],
+      "datatype": "display",
+      "visible": "true",
+      "closeRow": "true",
+      "colspan": "3",
+      "width": "320",
+      "height": "30",
+      "rows": "0",
+      "cols": "0",
+      "identifier": "form-save",
+      "inputType": "button"
+    },
+    {
+      "label": "END TABLE",
+      "value": "",
+      "options": [
+        {
+          "name": "optional",
+          "value": "true"
+        }
+      ],
+      "datatype": "display",
+      "visible": "true",
+      "closeRow": "false",
+      "colspan": "null",
+      "size": "null",
+      "rows": "null",
+      "cols": "null",
+      "identifier": "endTableIdentifier",
+      "inputType": "display-tbl-end"
+    }
+  ],
+  "collection": "lessons"
+}
