@@ -195,7 +195,7 @@ Handlebars.registerHelper('renderAudio', function(value) {
   for (var i = 0; i < value.length; i++) {
     out = out + '<p><audio controls preload="none">';
     out = out + '<source src="/lessonplanner/_design/lessonplanner/' + value[i] + '"/>';
-    out = out + ' </audio></p> ';
+    out = out + ' </audio><br/>' + decodeURIComponent(value[i]) + '</p> ';
   }
 	return out;
 });
@@ -203,7 +203,8 @@ Handlebars.registerHelper('renderAudio', function(value) {
 Handlebars.registerHelper('renderImages', function(value) {
 	var out = "";
   for (var i = 0; i < value.length; i++) {
-    out = out + '<p><img src="/lessonplanner/_design/lessonplanner/' + value[i] + '"/></p>';
+    out = out + '<p><img src="/lessonplanner/_design/lessonplanner/' + value[i] + '"/>' +
+      '</p>';
   }
 	return out;
 });
