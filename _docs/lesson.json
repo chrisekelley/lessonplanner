@@ -200,6 +200,24 @@
       "cols": "0",
       "identifier": "image",
       "inputType": "selectMult"
+     }, {
+      "label": "Media Order",
+      "value": "",
+      "options": [
+        {
+          "name": "optional",
+          "value": "true"
+        }
+      ],
+      "datatype": "string",
+      "visible": "true",
+      "closeRow": "true",
+      "colspan": "3",
+      "size": "25",
+      "rows": "0",
+      "cols": "0",
+      "identifier": "mediaOrder",
+      "inputType": "orderItems"
     },
     {
       "label": "Save",

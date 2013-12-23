@@ -34,6 +34,7 @@ genderWidgetCompiledHtml = Handlebars.compile($("#genderWidget").html());
 hiddenWidgetCompiledHtml = Handlebars.compile($("#hiddenWidget").html());
 buttonWidgetCompiledHtml = Handlebars.compile($("#buttonWidget").html());
 selectMultipleWidgetCompiledHtml = Handlebars.compile($("#selectMultipleWidget").html());
+orderItemsWidgetCompiledHtml = Handlebars.compile($("#orderItemsWidget").html());
 
 Handlebars.registerHelper("renderWidget", function(context) {
 	//console.log("renderWidget:" + JSON.stringify(context));
@@ -105,6 +106,8 @@ Handlebars.registerHelper("renderWidget", function(context) {
 		template = buttonWidgetCompiledHtml;
   } else if (inputType == 'selectMult') {
 		template = selectMultipleWidgetCompiledHtml;
+  } else if (inputType == 'orderItems') {
+		template = orderItemsWidgetCompiledHtml;
 	} else {
 		useTemplate = false; 
 	};
@@ -290,3 +293,26 @@ Handlebars.registerHelper('renderCkeditor', function(identifier, value) {
   return out;
 });
 
+Handlebars.registerHelper('renderOrderItems', function(identifier) {
+//  $( "#sortable" ).sortable();
+//  $( "#sortable" ).disableSelection();
+  var selectedMediaItems = [];
+  $('#image :selected').each(function(i, selected){
+    selectedMediaItems.push($(selected).text());
+    //console.log("selectedMediaItems[i]: " + i + " text: " + $(selected).text())
+  });
+  $('#audio :selected').each(function(i, selected){
+    selectedMediaItems.push($(selected).text());
+  });
+  var out = '<ul id="sortable">';
+  for(var i=0, l=selectedMediaItems.length; i<l; i++) {
+    var encodedValue = encodeURIComponent(selectedMediaItems[i]);
+    var cssFriendlyValue = encodedValue.replace(/%/g, 'ZZZ');
+    var cssFriendlyValue = cssFriendlyValue.replace(/\./g, 'XXX');
+    out = out + '<li id="'+ cssFriendlyValue + '" class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>' + selectedMediaItems[i] + '</li>';
+  }
+  out = out + '</ul>';
+  out = out + '<button type="button" id="resetOrder" name="resetOrder">Refresh Order</button> ';
+  out = out + '<input type="hidden" id="'+ identifier + '" name="'+ identifier + '"/>';
+  return out;
+});

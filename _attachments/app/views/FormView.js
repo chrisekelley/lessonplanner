@@ -67,6 +67,11 @@ var FormView = Backbone.View.extend({
 			this.formElements.add(revWidget,{at: 5});
 		}
 		this.formElements.each(this.addOne);
+    $( "#sortable" ).sortable();
+    $( "#sortable" ).disableSelection();
+
+    var sortedValues = $( "#sortable" ).sortable( "toArray" );
+    $("#mediaOrder").val(sortedValues);
 		return this;
 	},
   //recordSaved: false,
@@ -75,6 +80,8 @@ var FormView = Backbone.View.extend({
   currentTableName: "",
   currentRow:0,	// reset whenever closeRow = true;
   formElements: null,
+  audioSelected: null,
+  imagesSelected: null,
   addOne: function(formElement){
 //	console.log("add one:" + JSON.stringify(formElement));
 	  var inputType = formElement.get("inputType");
@@ -187,7 +194,55 @@ var FormView = Backbone.View.extend({
   },
   events: {
     "click #form-save" : "saveRecord",
+//    "mousedown #sortable" : "sortableItems",
+    "click #resetOrder" : "resetOrder",
+    "change #audio" : "resetOrder",
+    "change #image" : "resetOrder"
 //    "click #lessonText" : "enableCkeditor"
+  },
+  resetOrder: function() {
+//    var sortedValues = $( "#sortable" ).sortable( "toArray" );
+//    $("#mediaOrder").val(sortedValues);
+    var selectedMediaItems = [];
+    $('#image :selected').each(function(i, selected){
+      selectedMediaItems.push($(selected).text());
+      //console.log("selectedMediaItems[i]: " + i + " text: " + $(selected).text())
+    });
+    $('#audio :selected').each(function(i, selected){
+      selectedMediaItems.push($(selected).text());
+    });
+    var sortedValues = $( "#sortable" ).sortable( "toArray" );
+
+
+    // check if we need to add any items
+    for(var i=0, l=selectedMediaItems.length; i<l; i++) {
+      var selectedMediaItem = selectedMediaItems[i];
+      var encodedValue = encodeURIComponent(selectedMediaItem);
+      var cssFriendlyValue = encodedValue.replace(/%/g, 'ZZZ');
+      var cssFriendlyValue = cssFriendlyValue.replace(/\./g, 'XXX');
+      if ($.inArray(cssFriendlyValue, sortedValues) == -1) {
+        $("#sortable").append('<li id="'+ cssFriendlyValue + '" class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>' + selectedMediaItems[i] + '</li>');
+      }
+    }
+//    check if we need to delete any items
+//    for(var i=0, l=sortedValues.length; i<l; i++) {
+//      var sortedValue = sortedValues[i];
+//      var deleteme = true;
+//      for(var i=0, l=selectedMediaItems.length; i<l; i++) {
+//        var selectedMediaItem = selectedMediaItems[i];
+//        var encodedValue = encodeURIComponent(selectedMediaItem);
+//        var cssFriendlyValue = encodedValue.replace(/%/g, 'ZZZ');
+//        if (cssFriendlyValue == sortedValue) {
+//          deleteme == false;
+//        }
+//      }
+//      if (deleteme == true) {
+//        $('#' + sortedValue).remove();
+//      }
+////      if ($.inArray(sortedValue, selectedMediaItems) == -1) {
+////        $('#' + sortedValue).remove();
+////      }
+//    }
   },
   enableCkeditor: function() {
     var name;
@@ -201,6 +256,14 @@ var FormView = Backbone.View.extend({
   },
   saveRecord: function(e){ 
 	  e.preventDefault();
+    var sortedValues = $( "#sortable" ).sortable( "toArray" );
+    for(var i=0; i < sortedValues.length; i++) {
+      sortedValues[i] = sortedValues[i].replace('/ZZZ/g', '%');
+      sortedValues[i] = sortedValues[i].replace('/XXX/g', '.');
+    }
+
+//    $("#mediaOrder").val(sortedValues);
+    console.log("sortedValues: " + sortedValues);
 	  console.log("validating the form submission.");
 	  var validationErrors = [];
 	  this.formElements.each(function(formElement){
@@ -217,6 +280,7 @@ var FormView = Backbone.View.extend({
 		  var formData = $("#theForm").toObject();
       var editor_data = CKEDITOR.instances.lessonText.getData();
       formData["lessonText"] = editor_data;
+      formData["mediaOrder"] = sortedValues;
 		  var formId = $("#formId").val();
 		  console.log("formData: " + JSON.stringify(formData));
 		  var _id = formData._id;
