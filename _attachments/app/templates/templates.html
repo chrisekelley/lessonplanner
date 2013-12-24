@@ -118,6 +118,12 @@
     {{/renderSelector}}
     </select>
 </script>
+<script id="selectMultipleWidget2" type="text/x-handlebars-template">
+    <select id='{{identifier}}' {{#options}}data-{{name}}='{{value}}' {{/options}} name='{{identifier}}' multiple size='10'>
+    {{#renderSelector2 enumerations value}}
+    {{/renderSelector2}}
+    </select>
+</script>
 <script id="displayAudioWidget" type="text/x-handlebars-template">
     <!--{{#renderAudio value}}-->
     <!--{{/renderAudio}}-->

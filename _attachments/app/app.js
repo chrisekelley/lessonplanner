@@ -232,7 +232,7 @@ var AppRouter = Backbone.Router.extend({
       success: function(form, resp){
         var newModel = new Form();
         var newPatientFormView = new FormView({model: newModel, currentForm:form, el: $("#formRenderingView")});
-        FORMY.audioFiles = [];
+        //FORMY.audioFiles = [];
         FORMY.imageFiles = [];
         FORMY.assets = new AssetCollection();
         FORMY.assets.db["view"] = ["byAttachment"];
@@ -243,7 +243,7 @@ var AppRouter = Backbone.Router.extend({
               for(var index in FORMY.assets.models) {
                 var asset = Object.keys(FORMY.assets.models[index].attributes)[0]
                 if (asset.startsWith("lessons/audio/")) {
-                  FORMY.audioFiles.push(asset);
+                  //FORMY.audioFiles.push(asset);
                   //console.log( "asset : " + asset);
                 } else if (asset.startsWith("lessons/images/")) {
                   FORMY.imageFiles.push(asset);
@@ -251,13 +251,29 @@ var AppRouter = Backbone.Router.extend({
                 }
               }
               //console.log( "FORMY.audioFiles : " + FORMY.audioFiles);
-              newPatientFormView.render();
+              //newPatientFormView.render();
             },
             error : function(){
               console.log("Error loading FORMY.assets: " + arguments);
             }
           }
         )
+        FORMY.audioFiles = new AudioCollection();
+        //FORMY.audioFiles.comparator = "_id";
+        FORMY.audioFiles.db["view"] = ["byAudio"];
+        FORMY.audioFiles.fetch(
+          {
+            success : function(){
+              console.log("item count: " + FORMY.audioFiles.length);
+              //console.log( "FORMY.audioFiles : " + FORMY.audioFiles);
+              newPatientFormView.render();
+            },
+            error : function(){
+              console.log("Error loading FORMY.audioFiles: " + arguments);
+            }
+          }
+        )
+
       },
       error: function() {
         console.log("Error loading incident: " + arguments);

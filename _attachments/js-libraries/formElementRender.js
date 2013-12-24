@@ -34,6 +34,7 @@ genderWidgetCompiledHtml = Handlebars.compile($("#genderWidget").html());
 hiddenWidgetCompiledHtml = Handlebars.compile($("#hiddenWidget").html());
 buttonWidgetCompiledHtml = Handlebars.compile($("#buttonWidget").html());
 selectMultipleWidgetCompiledHtml = Handlebars.compile($("#selectMultipleWidget").html());
+selectMultipleWidget2CompiledHtml = Handlebars.compile($("#selectMultipleWidget2").html());
 orderItemsWidgetCompiledHtml = Handlebars.compile($("#orderItemsWidget").html());
 
 Handlebars.registerHelper("renderWidget", function(context) {
@@ -105,7 +106,13 @@ Handlebars.registerHelper("renderWidget", function(context) {
 	} else if (inputType == 'button') {
 		template = buttonWidgetCompiledHtml;
   } else if (inputType == 'selectMult') {
-		template = selectMultipleWidgetCompiledHtml;
+    if (inputType == 'selectMult') {
+      if (identifier === 'audio') {
+        template = selectMultipleWidget2CompiledHtml;
+      } else if (identifier === 'image') {
+        template = selectMultipleWidgetCompiledHtml;
+      }
+    }
   } else if (inputType == 'orderItems') {
 		template = orderItemsWidgetCompiledHtml;
 	} else {
@@ -283,6 +290,21 @@ Handlebars.registerHelper('renderSelector', function(list, value) {
       out = out + '  <option selected = "selected" value="' + encodeURIComponent(list[i]) + '">'  + list[i] + '</option>';
     } else {
       out = out + '  <option value="' + encodeURIComponent(list[i]) + '">'  + list[i] + '</option>';
+    }
+  }
+  return out;
+});
+Handlebars.registerHelper('renderSelector2', function(list, value) {
+  //list.sort();
+  var out = "";
+  for (var i = 0; i < list.models.length; i++) {
+    var item = list.models[i];
+    var _id = item.get("_id");
+    var encodedpath = item.get("encodedpath");
+    if (value == item.get("_id")) {
+      out = out + '  <option selected = "selected" value="' + encodedpath + '">'  + _id + '</option>';
+    } else {
+      out = out + '  <option value="' + encodedpath + '">'  + _id + '</option>';
     }
   }
   return out;
