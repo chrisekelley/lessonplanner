@@ -119,14 +119,18 @@
     </select>
 </script>
 <script id="displayAudioWidget" type="text/x-handlebars-template">
-    {{#renderAudio value}}
-    {{/renderAudio}}
+    <!--{{#renderAudio value}}-->
+    <!--{{/renderAudio}}-->
 </script>
 <script id="displayImagesWidget" type="text/x-handlebars-template">
-    {{#renderImages value}}
-    {{/renderImages}}
+    <!--{{#renderImages value}}-->
+    <!--{{/renderImages}}-->
 </script>
 <script id="orderItemsWidget" type="text/x-handlebars-template">
     {{#renderOrderItems identifier}}
     {{/renderOrderItems}}
+</script>
+<script id="displayOrderItems" type="text/x-handlebars-template">
+    {{#renderOrderedAssets value}}
+    {{/renderOrderedAssets}}
 </script>

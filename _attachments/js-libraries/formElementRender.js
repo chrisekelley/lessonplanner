@@ -312,7 +312,7 @@ Handlebars.registerHelper('renderOrderItems', function(identifier) {
     out = out + '<li id="'+ cssFriendlyValue + '" class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>' + selectedMediaItems[i] + '</li>';
   }
   out = out + '</ul>';
-  out = out + '<button type="button" id="resetOrder" name="resetOrder">Refresh Order</button> ';
+ // out = out + '<button type="button" id="resetOrder" name="resetOrder">Refresh Order</button> ';
   out = out + '<input type="hidden" id="'+ identifier + '" name="'+ identifier + '"/>';
   return out;
 });

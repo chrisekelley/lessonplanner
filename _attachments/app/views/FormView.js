@@ -195,7 +195,7 @@ var FormView = Backbone.View.extend({
   events: {
     "click #form-save" : "saveRecord",
 //    "mousedown #sortable" : "sortableItems",
-    "click #resetOrder" : "resetOrder",
+//    "click #resetOrder" : "resetOrder",
     "change #audio" : "resetOrder",
     "change #image" : "resetOrder"
 //    "click #lessonText" : "enableCkeditor"
@@ -258,10 +258,9 @@ var FormView = Backbone.View.extend({
 	  e.preventDefault();
     var sortedValues = $( "#sortable" ).sortable( "toArray" );
     for(var i=0; i < sortedValues.length; i++) {
-      sortedValues[i] = sortedValues[i].replace('/ZZZ/g', '%');
-      sortedValues[i] = sortedValues[i].replace('/XXX/g', '.');
+      sortedValues[i] = sortedValues[i].replace(/ZZZ/g, '%');
+      sortedValues[i] = sortedValues[i].replace(/XXX/g, '.');
     }
-
 //    $("#mediaOrder").val(sortedValues);
     console.log("sortedValues: " + sortedValues);
 	  console.log("validating the form submission.");
